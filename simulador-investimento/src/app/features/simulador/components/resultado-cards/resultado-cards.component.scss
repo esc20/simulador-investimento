@@ -1,0 +1,16 @@
+.cards-grid {
+  .card {
+    background: #F2EBD3;
+    border-radius: 20px;
+    // Aplicando a sombra dupla
+    box-shadow: 9px 9px 18px #cec8b3, 
+               -9px -9px 18px #ffffff;
+    
+    &.principal {
+      border: 1px solid rgba(166, 124, 82, 0.1); // Bronze sutil
+    }
+
+    span { color: #797670; }
+    h2 { font-weight: 300; color: #2D2926; }
+  }
+}

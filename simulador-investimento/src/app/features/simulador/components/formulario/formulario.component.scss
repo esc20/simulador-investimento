@@ -1,0 +1,41 @@
+.simulador-form {
+  .input-group {
+    margin-bottom: 30px;
+
+    label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #797670;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    // Estilizando o Slider (O "Trilho")
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 12px;
+      border-radius: 10px;
+      background: #F2EBD3;
+      // Efeito de "Cava" no marfim
+      box-shadow: inset 4px 4px 8px #cec8b3, 
+                  inset -4px -4px 8px #ffffff;
+      outline: none;
+
+      // A "Bolinha" (O botão que desliza)
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 24px;
+        height: 24px;
+        background: #F2EBD3;
+        border-radius: 50%;
+        // Efeito de "Botão que sai"
+        box-shadow: 4px 4px 8px #cec8b3, 
+                   -4px -4px 8px #ffffff;
+        cursor: pointer;
+        border: 1px solid rgba(166, 124, 82, 0.2); // Toque bronze
+      }
+    }
+  }
+}

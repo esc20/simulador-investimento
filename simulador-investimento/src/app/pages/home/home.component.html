@@ -1,0 +1,23 @@
+<main class="container">
+  <header>
+    <h1>Apex Invest</h1>
+    <p>Simulador de Patrimônio</p>
+  </header>
+
+  <div class="dashboard-grid">
+    <!-- Esquerda: Inputs -->
+    <section class="configuracao">
+      <app-formulario (aoSimular)="atualizarResultados($event)"></app-formulario>
+    </section>
+
+    <!-- Direita: Visão Geral -->
+    <section class="visualizacao">
+      <app-resultado-cards [resultados]="resultadosSimulacao()"></app-resultado-cards>
+      
+      <!-- Espaço reservado para o gráfico amanhã -->
+      <div class="placeholder-grafico">
+        <p>Gráfico de Evolução (Dia 2)</p>
+      </div>
+    </section>
+  </div>
+</main>

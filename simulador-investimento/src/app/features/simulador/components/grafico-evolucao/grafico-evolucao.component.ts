@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, effect, input } from '@angular/core';
+import { Component, ElementRef, ViewChild, effect, input, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ResultadoSimulacao } from '../../../../core/models/simulacao.model';
 
@@ -7,35 +7,44 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-grafico-evolucao',
   standalone: true,
-  template: `<div class="chart-container"><canvas #meuGrafico></canvas></div>`,
-  styles: [`.chart-container { height: 350px; width: 100%; }`]
+  templateUrl: './grafico-evolucao.component.html',
+  styleUrl: './grafico-evolucao.component.scss'
 })
 export class GraficoEvolucaoComponent {
-  @ViewChild('meuGrafico') canvas!: ElementRef;
+  @ViewChild('meuGrafico') canvas!: ElementRef<HTMLCanvasElement>;
   resultados = input<ResultadoSimulacao[]>([]);
   chart?: Chart;
 
   constructor() {
-    // O efeito observa mudanças no input 'resultados'
+    // O effect garante que, sempre que 'resultados' mudar, o gráfico tente atualizar
     effect(() => {
       const dados = this.resultados();
-      if (dados.length > 0 && this.canvas) {
-        this.updateChart(dados);
-      }
+      // O 'setTimeout' dá um fôlego para o Angular terminar de renderizar o HTML
+      setTimeout(() => {
+        if (this.canvas?.nativeElement && dados.length > 0) {
+          this.updateChart(dados);
+        }
+      }, 0);
     });
   }
 
   private updateChart(dados: ResultadoSimulacao[]) {
-    if (this.chart) this.chart.destroy();
+    // Destruir o gráfico anterior é essencial para evitar telas brancas ou erros de 'canvas in use'
+    if (this.chart) {
+      this.chart.destroy();
+    }
 
-    this.chart = new Chart(this.canvas.nativeElement, {
+    const ctx = this.canvas.nativeElement.getContext('2d');
+    if (!ctx) return;
+
+    this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: dados.map(d => `Mês ${d.mes}`),
         datasets: [{
           label: 'Patrimônio',
           data: dados.map(d => d.valorTotal),
-          borderColor: '#A67C52', // Bronze para combinar com o Marfim
+          borderColor: '#A67C52',
           backgroundColor: 'rgba(166, 124, 82, 0.1)',
           fill: true,
           tension: 0.4,
@@ -44,13 +53,14 @@ export class GraficoEvolucaoComponent {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: false, // Permite que o gráfico preencha o container
         plugins: { legend: { display: false } },
         scales: {
           x: { display: false },
-          y: { 
+          y: {
+            beginAtZero: false,
             ticks: { color: '#797670' },
-            grid: { color: 'rgba(0,0,0,0.03)' } 
+            grid: { color: 'rgba(0,0,0,0.03)' }
           }
         }
       }

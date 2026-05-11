@@ -1,0 +1,58 @@
+.tabela-container {
+  margin-top: 30px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0; // Removido para o sticky header encostar no topo
+  border-radius: 20px;
+  background: #F2EBD3;
+  box-shadow: inset 6px 6px 12px #cec8b3, inset -6px -6px 12px #ffffff;
+  position: relative;
+
+  // Estilização da Scrollbar
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { 
+    background: #cec8b3; 
+    border-radius: 10px; 
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      
+      th {
+        padding: 20px 15px;
+        text-align: left;
+        color: #797670;
+        font-weight: 600;
+        background: #F2EBD3; // Fundo sólido para cobrir os dados ao rolar
+        border-bottom: 2px solid rgba(166, 124, 82, 0.1);
+      }
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      
+      td {
+        padding: 15px;
+        color: #2D2926;
+      }
+
+      &:last-child td { border-bottom: none; }
+
+      .texto-juros { 
+        color: #4A7c44; 
+        font-weight: 500; 
+      }
+      .texto-total {  
+        font-weight: 600; 
+      }
+    }
+  }
+}

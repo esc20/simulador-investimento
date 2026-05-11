@@ -5,19 +5,24 @@
   </header>
 
   <div class="dashboard-grid">
-    <!-- Esquerda: Inputs -->
+    <!-- Coluna da Esquerda: Inputs -->
     <section class="configuracao">
       <app-formulario (aoSimular)="atualizarResultados($event)"></app-formulario>
     </section>
 
-    <!-- Direita: Visão Geral -->
+    <!-- Coluna da Direita: Resultados -->
     <section class="visualizacao">
+      <!-- Cards de Resumo -->
       <app-resultado-cards [resultados]="resultadosSimulacao()"></app-resultado-cards>
-      
-      <!-- Espaço reservado para o gráfico amanhã -->
-      <div class="placeholder-grafico">
-        <p>Gráfico de Evolução (Dia 2)</p>
-      </div>
+
+      <!-- Painel de Insights (Novo!) -->
+      <app-insights [resultados]="resultadosSimulacao()"></app-insights>
+
+      <!-- Gráfico de Evolução -->
+      <app-grafico-evolucao [resultados]="resultadosSimulacao()"></app-grafico-evolucao>
+
+      <!-- Tabela Detalhada -->
+      <app-tabela-evolucao [resultados]="resultadosSimulacao()"></app-tabela-evolucao>
     </section>
   </div>
 </main>

@@ -1,16 +1,60 @@
 .cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 35px; // Aumentamos o espaço para as sombras não se atropelarem
+  padding: 10px;
+
   .card {
     background: #F2EBD3;
-    border-radius: 20px;
-    // Aplicando a sombra dupla
-    box-shadow: 9px 9px 18px #cec8b3, 
-               -9px -9px 18px #ffffff;
-    
-    &.principal {
-      border: 1px solid rgba(166, 124, 82, 0.1); // Bronze sutil
-    }
+    border-radius: 25px;
+    padding: 25px;
+    // Sombra Neumórfica Padrão (Elevada)
+    box-shadow: 9px 9px 18px #cec8b3, -9px -9px 18px #ffffff;
+    transition: all 0.3s ease;
 
-    span { color: #797670; }
-    h2 { font-weight: 300; color: #2D2926; }
+    &.principal {
+      margin-bottom: 10px; // Afasta ainda mais do bloco de baixo
+      border: 1px solid rgba(166, 124, 82, 0.15); // Bronze um pouco mais visível
+      
+      span { 
+        font-size: 0.9rem; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+      }
+      
+      h2 { 
+        font-size: 2.2rem; 
+        margin: 10px 0 0; 
+        color: #A67C52; 
+        font-weight: 400;
+      }
+    }
+  }
+
+  .secundarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px; // Espaço entre os dois cards menores
+
+    .card {
+      padding: 20px;
+      
+      p { 
+        font-size: 1.2rem; 
+        margin: 8px 0 0; 
+        font-weight: 500;
+      }
+
+      .juros {
+        color: #4A7c44; // Um verde mais sóbrio para os juros
+      }
+    }
+  }
+}
+
+// Ajuste para telas menores
+@media (max-width: 450px) {
+  .secundarios {
+    grid-template-columns: 1fr;
   }
 }

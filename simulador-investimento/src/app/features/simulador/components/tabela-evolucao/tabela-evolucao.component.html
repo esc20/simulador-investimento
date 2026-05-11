@@ -1,0 +1,22 @@
+<div class="tabela-container card-neumorphic-inset">
+  <table>
+    <thead>
+      <tr>
+        <th>Mês</th>
+        <th>Investido</th>
+        <th>Juros</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of resultados(); track item.mes) {
+        <tr>
+          <td>{{ item.mes }}ª</td>
+          <td>{{ item.totalInvestido | currency:'BRL' }}</td>
+          <td class="texto-juros">+ {{ item.totalJuros | currency:'BRL' }}</td>
+          <td class="texto-total">{{ item.valorTotal | currency:'BRL' }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

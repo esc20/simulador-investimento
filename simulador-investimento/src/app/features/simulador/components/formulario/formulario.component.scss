@@ -14,28 +14,75 @@
     // Estilizando o Slider (O "Trilho")
     input[type="range"] {
       -webkit-appearance: none;
+      appearance: none;
       width: 100%;
       height: 12px;
       border-radius: 10px;
       background: #F2EBD3;
-      // Efeito de "Cava" no marfim
-      box-shadow: inset 4px 4px 8px #cec8b3, 
-                  inset -4px -4px 8px #ffffff;
+      // Efeito de "Cava" no marfim (Inset)
+      box-shadow: inset 4px 4px 8px #cec8b3, inset -4px -4px 8px #ffffff;
       outline: none;
+      margin: 15px 0;
 
-      // A "Bolinha" (O botão que desliza)
+      // A "Bolinha" - Webkit (Chrome, Safari, Edge)
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
+        appearance: none;
         width: 24px;
         height: 24px;
         background: #F2EBD3;
         border-radius: 50%;
-        // Efeito de "Botão que sai"
-        box-shadow: 4px 4px 8px #cec8b3, 
-                   -4px -4px 8px #ffffff;
+        // Efeito de "Botão que sai" (Elevado)
+        box-shadow: 4px 4px 8px #cec8b3, -4px -4px 8px #ffffff;
         cursor: pointer;
-        border: 1px solid rgba(166, 124, 82, 0.2); // Toque bronze
+        border: 1px solid rgba(166, 124, 82, 0.2);
+        transition: transform 0.1s ease;
+
+        &:active {
+          transform: scale(0.9);
+        }
       }
+
+      // A "Bolinha" - Firefox
+      &::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: #F2EBD3;
+        border-radius: 50%;
+        box-shadow: 4px 4px 8px #cec8b3, -4px -4px 8px #ffffff;
+        cursor: pointer;
+        border: 1px solid rgba(166, 124, 82, 0.2);
+      }
+    }
+  }
+
+  // Novo Botão de Reset
+  .btn-reset {
+    margin-top: 10px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 15px;
+    background: #F2EBD3;
+    color: #797670;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    // Neumorfismo Elevado
+    box-shadow: 6px 6px 12px #cec8b3, -6px -6px 12px #ffffff;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #A67C52;
+      box-shadow: 3px 3px 6px #cec8b3, -3px -3px 6px #ffffff;
+    }
+
+    &:active {
+      // Efeito de botão pressionado (Afunda)
+      box-shadow: inset 4px 4px 8px #cec8b3, inset -4px -4px 8px #ffffff;
+      transform: scale(0.98);
     }
   }
 }

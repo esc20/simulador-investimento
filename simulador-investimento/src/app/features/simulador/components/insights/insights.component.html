@@ -1,0 +1,12 @@
+@if (dadosFinais(); as dados) {
+  <div class="insights-container">
+    <div class="icon">💡</div>
+    <div class="content">
+      <h3>Insight da Apex</h3>
+      <p>
+        Em {{ dados.mes }} meses, os juros terão trabalhado tanto por você que 
+        <span class="destaque">{{ porcentagemJuros() }}%</span> do seu patrimônio final será composto apenas por rendimentos!
+      </p>
+    </div>
+  </div>
+}

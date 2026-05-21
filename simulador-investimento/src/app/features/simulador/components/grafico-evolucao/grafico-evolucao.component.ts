@@ -16,10 +16,9 @@ export class GraficoEvolucaoComponent {
   chart?: Chart;
 
   constructor() {
-    // O effect garante que, sempre que 'resultados' mudar, o gráfico tente atualizar
+  
     effect(() => {
       const dados = this.resultados();
-      // O 'setTimeout' dá um fôlego para o Angular terminar de renderizar o HTML
       setTimeout(() => {
         if (this.canvas?.nativeElement && dados.length > 0) {
           this.updateChart(dados);
@@ -29,7 +28,6 @@ export class GraficoEvolucaoComponent {
   }
 
   private updateChart(dados: ResultadoSimulacao[]) {
-    // Destruir o gráfico anterior é essencial para evitar telas brancas ou erros de 'canvas in use'
     if (this.chart) {
       this.chart.destroy();
     }
@@ -53,7 +51,7 @@ export class GraficoEvolucaoComponent {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // Permite que o gráfico preencha o container
+        maintainAspectRatio: false, 
         plugins: { legend: { display: false } },
         scales: {
           x: { display: false },

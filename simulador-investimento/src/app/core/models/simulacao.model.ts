@@ -1,5 +1,3 @@
-// src/app/core/models/simulacao.model.ts
-
 export interface SimulacaoInput {
   valorInicial: number;
   aporteMensal: number;

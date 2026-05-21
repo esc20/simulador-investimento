@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+
 // Cores Executive Ivory (Marfim de Elefante)
 $bg-ivory: #F2EBD3;
 $shadow-dark: #cec8b3; // Sombra (um pouco mais escura que o marfim)
@@ -12,7 +12,6 @@ html, body {
   font-family: 'Inter', sans-serif;
 }
 
-// O segredo do Neumorfismo (Mixins facilitam a vida de Sênior)
 @mixin neumorphic-flat {
   background: $bg-ivory;
   box-shadow: 8px 8px 16px $shadow-dark, 
@@ -29,5 +28,5 @@ html, body {
   @include neumorphic-flat;
   border-radius: 20px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2); // Leve brilho na borda
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }

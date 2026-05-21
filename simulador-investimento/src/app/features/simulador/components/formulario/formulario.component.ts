@@ -16,7 +16,6 @@ export class FormularioComponent implements OnInit {
   private calculoService = inject(CalculoService);
   private readonly STORAGE_KEY = 'apex_invest_dados';
 
-  // Output para enviar os resultados para o componente pai (Home)
   aoSimular = output<any>();
 
   form: FormGroup = this.fb.group({
@@ -38,11 +37,10 @@ export class FormularioComponent implements OnInit {
       }
     });
 
-    // Simulação inicial ao carregar a página
     this.simularInicial();
   }
 
-  // Método para resetar tudo para o estado original
+  
   resetarFormulario() {
     const valoresPadrao = {
       valorInicial: 1000,
@@ -53,10 +51,10 @@ export class FormularioComponent implements OnInit {
 
     localStorage.removeItem(this.STORAGE_KEY);
     
-    // Reseta o form (o patchValue ou reset disparam o valueChanges automaticamente)
+    
     this.form.reset(valoresPadrao);
     
-    // Forçamos uma emissão manual para garantir que os outros componentes atualizem
+    
     const resultado = this.calculoService.simular(valoresPadrao);
     this.aoSimular.emit(resultado);
   }
@@ -68,8 +66,7 @@ export class FormularioComponent implements OnInit {
   private carregarDadosSalvos() {
     const salvo = localStorage.getItem(this.STORAGE_KEY);
     if (salvo) {
-      // patchValue preenche o formulário com os dados do Storage
-      // emitEvent: false evita disparar o cálculo duas vezes no load inicial
+      
       this.form.patchValue(JSON.parse(salvo), { emitEvent: false });
     }
   }

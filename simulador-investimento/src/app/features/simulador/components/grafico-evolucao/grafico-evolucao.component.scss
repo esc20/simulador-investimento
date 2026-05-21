@@ -3,12 +3,11 @@
   padding: 20px;
   background: #F2EBD3;
   border-radius: 20px;
-  // O efeito "inset" que você definiu:
   box-shadow: inset 6px 6px 12px #cec8b3, inset -6px -6px 12px #ffffff;
 }
 
 .chart-container {
-  height: 300px; // Altura fixa para o Chart.js respirar
+  height: 300px; 
   width: 100%;
   position: relative;
 }

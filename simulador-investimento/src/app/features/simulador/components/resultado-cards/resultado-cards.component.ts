@@ -10,10 +10,7 @@ import { ResultadoSimulacao } from '../../../../core/models/simulacao.model';
   styleUrl: './resultado-cards.component.scss'
 })
 export class ResultadoCardsComponent {
-  // Recebe o array completo de resultados do pai
   resultados = input<ResultadoSimulacao[]>([]);
-
-  // Computed para pegar sempre o último mês da simulação (o resultado final)
   dadosFinais = computed(() => {
     const res = this.resultados();
     return res.length > 0 ? res[res.length - 1] : null;

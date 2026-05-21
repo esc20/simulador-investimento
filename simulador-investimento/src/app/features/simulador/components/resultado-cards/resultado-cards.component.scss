@@ -1,20 +1,19 @@
 .cards-grid {
   display: flex;
   flex-direction: column;
-  gap: 35px; // Aumentamos o espaço para as sombras não se atropelarem
+  gap: 35px; 
   padding: 10px;
 
   .card {
     background: #F2EBD3;
     border-radius: 25px;
     padding: 25px;
-    // Sombra Neumórfica Padrão (Elevada)
     box-shadow: 9px 9px 18px #cec8b3, -9px -9px 18px #ffffff;
     transition: all 0.3s ease;
 
     &.principal {
-      margin-bottom: 10px; // Afasta ainda mais do bloco de baixo
-      border: 1px solid rgba(166, 124, 82, 0.15); // Bronze um pouco mais visível
+      margin-bottom: 10px;
+      border: 1px solid rgba(166, 124, 82, 0.15); 
       
       span { 
         font-size: 0.9rem; 
@@ -34,7 +33,7 @@
   .secundarios {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px; // Espaço entre os dois cards menores
+    gap: 25px; 
 
     .card {
       padding: 20px;
@@ -46,13 +45,13 @@
       }
 
       .juros {
-        color: #4A7c44; // Um verde mais sóbrio para os juros
+        color: #4A7c44; 
       }
     }
   }
 }
 
-// Ajuste para telas menores
+
 @media (max-width: 450px) {
   .secundarios {
     grid-template-columns: 1fr;

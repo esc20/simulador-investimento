@@ -12,13 +12,11 @@ import { ResultadoSimulacao } from '../../../../core/models/simulacao.model';
 export class InsightsComponent {
   resultados = input<ResultadoSimulacao[]>([]);
 
-  // Pega o último registro da simulação
   dadosFinais = computed(() => {
     const res = this.resultados();
     return res.length > 0 ? res[res.length - 1] : null;
   });
 
-  // Calcula quanto dos juros representa do valor total
   porcentagemJuros = computed(() => {
     const dados = this.dadosFinais();
     if (!dados || dados.valorTotal === 0) return 0;

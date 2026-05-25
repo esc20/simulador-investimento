@@ -22,11 +22,8 @@ import { InsightsComponent } from '../../features/simulador/components/insights/
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
-  // Signal que centraliza o estado dos resultados na página
   resultadosSimulacao = signal<ResultadoSimulacao[]>([]);
 
-  // Função chamada pelo output (aoSimular) do formulário
   atualizarResultados(novosResultados: ResultadoSimulacao[]) {
     this.resultadosSimulacao.set(novosResultados);
   }

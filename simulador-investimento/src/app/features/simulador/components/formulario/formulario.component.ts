@@ -27,8 +27,6 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit() {
     this.carregarDadosSalvos();
-
-    // Escuta mudanças, salva no storage e emite o cálculo automaticamente
     this.form.valueChanges.subscribe(valores => {
       if (this.form.valid) {
         this.salvarNoStorage(valores);

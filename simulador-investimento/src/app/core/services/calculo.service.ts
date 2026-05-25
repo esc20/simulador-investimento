@@ -6,13 +6,11 @@ import { SimulacaoInput, ResultadoSimulacao } from '../models/simulacao.model';
 })
 export class CalculoService {
   
-  // Função que faz o cálculo pesado
   simular(dados: SimulacaoInput): ResultadoSimulacao[] {
     const resultados: ResultadoSimulacao[] = [];
     let saldoTotal = dados.valorInicial;
     let totalInvestido = dados.valorInicial;
     
-    // Converte taxa anual para mensal
     const taxaMensal = Math.pow(1 + dados.taxaJuros / 100, 1 / 12) - 1;
 
     for (let i = 1; i <= dados.periodoMeses; i++) {

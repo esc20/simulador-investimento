@@ -4,12 +4,6 @@ Plataforma digital para simulação, projeção estatística e auditoria de juro
 
 ---
 
-## Demonstração Visual
-
-![Interface do Simulador](simulador-investimento\assets\apex-weather.gif)
-
-
----
 
 ## Engenharia de Software e Diferenciais Técnicos
 

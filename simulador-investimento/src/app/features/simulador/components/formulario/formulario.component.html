@@ -1,27 +1,26 @@
 <form [formGroup]="form" class="simulador-form">
   <div class="input-group">
     <label>Investimento Inicial: {{ form.get('valorInicial')?.value | currency:'BRL' }}</label>
-    <input type="range" formControlName="valorInicial" min="0" max="100000" step="500">
+    
+    <input type="range" formControlName="valorInicial" min="0" max="100000" step="500" aria-label="Investimento Inicial">
   </div>
 
   <div class="input-group">
     <label>Aporte Mensal: {{ form.get('aporteMensal')?.value | currency:'BRL' }}</label>
-    <input type="range" formControlName="aporteMensal" min="0" max="10000" step="100">
+    
+    <input type="range" formControlName="aporteMensal" min="0" max="10000" step="100" aria-label="Aporte Mensal">
   </div>
 
   <div class="input-group">
     <label>Taxa de Juros (ao ano): {{ form.get('taxaJuros')?.value }}%</label>
-    <input type="range" formControlName="taxaJuros" min="0" max="20" step="0.5">
+    
+    <input type="range" formControlName="taxaJuros" min="0" max="20" step="0.5" aria-label="Taxa de Juros ao ano">
   </div>
 
   <div class="input-group">
     <label>Período (meses): {{ form.get('periodoMeses')?.value }}</label>
-    <input type="range" formControlName="periodoMeses" min="1" max="360" step="1">
-  </div>
-
-  <div class="input-group">
-    <label>Período (meses): {{ form.get('periodoMeses')?.value }}</label>
-    <input type="range" formControlName="periodoMeses" min="1" max="360" step="1">
+    
+    <input type="range" formControlName="periodoMeses" min="1" max="360" step="1" aria-label="Período em meses">
   </div>
 
   <button type="button" class="btn-reset" (click)="resetarFormulario()">

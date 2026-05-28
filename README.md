@@ -3,7 +3,18 @@
 Plataforma digital para simulação, projeção estatística e auditoria de juros compostos desenvolvida com Angular 18+. A aplicação utiliza o ecossistema de Reactive Forms associado a esteiras de cálculo reativo automatizado para computar evoluções patrimoniais em tempo real, distribuindo dados de forma unidirecional através de Signals centrais para painéis analíticos, gráficos interativos baseados em Chart.js e tabelas com rolagem e cabeçalho fixo.
 
 ---
+---
 
+## Indicadores de Auditoria e Desempenho
+
+O simulador passou pela avaliação do Google Lighthouse na simulação para dispositivos móveis, apresentando os seguintes resultados oficiais de qualidade de software:
+
+* **Melhores Práticas (100/100)**: Pontuação máxima. O código cumpre todas as diretrizes modernas de segurança, integridade da Web API e uso de pacotes estáveis.
+* **Acessibilidade (95/100)**: Zona de excelência em conformidade com as regras da WCAG através do uso correto de atributos acessíveis (aria-labels) e calibração de contraste tipográfico.
+* **SEO (90/100)**: Estrutura otimizada com indexação correta de tags e metadados estruturados para motores de busca.
+* **Performance (45/100 - Mobile)**: Como o Chart.js renderiza o gráfico de linhas diretamente no Canvas usando a CPU do dispositivo, o navegador exige mais ciclos de processamento na inicialização em ambientes simulados de redes lentas. Para otimizar essa esteira, o projeto utiliza o recurso moderno de diretivas deferíveis (`@defer (on viewport)`) nativo do Angular, fazendo o download e a ativação do motor gráfico de forma sob demanda apenas quando o elemento entra na área visível do navegador.
+
+---
 
 ## Engenharia de Software e Diferenciais Técnicos
 

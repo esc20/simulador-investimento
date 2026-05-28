@@ -14,7 +14,14 @@
 
       <app-insights [resultados]="resultadosSimulacao()"></app-insights>
 
-      <app-grafico-evolucao [resultados]="resultadosSimulacao()"></app-grafico-evolucao>
+    
+      @defer (on viewport) {
+        <app-grafico-evolucao [resultados]="resultadosSimulacao()"></app-grafico-evolucao>
+      } @placeholder {
+        <div class="carregando-grafico" style="padding: 20px; text-align: center; color: #797670; font-family: 'Inter', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+          Carregando painel analítico...
+        </div>
+      }
 
       <app-tabela-evolucao [resultados]="resultadosSimulacao()"></app-tabela-evolucao>
     </section>

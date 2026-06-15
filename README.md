@@ -7,7 +7,7 @@ Plataforma digital para simulação, projeção estatística e auditoria de juro
 
 ### DEMONSTRAÇÃO VISUAL
 
-![Interface do Simulador](assets/apex-invest-demo.gif)
+![Interface do Simulador](simulador-investimento\assets\Apex-Invest.gif)
 
 ---
 

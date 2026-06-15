@@ -1,6 +1,7 @@
-import { Component, OnInit, inject, output } from '@angular/core';
+import { Component, OnInit, inject, output, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
 import { CalculoService } from '../../../../core/services/calculo.service';
 import { SimulacaoInput } from '../../../../core/models/simulacao.model';
 
@@ -14,6 +15,7 @@ import { SimulacaoInput } from '../../../../core/models/simulacao.model';
 export class FormularioComponent implements OnInit {
   private fb = inject(FormBuilder);
   private calculoService = inject(CalculoService);
+  private destroyRef = inject(DestroyRef); 
   private readonly STORAGE_KEY = 'apex_invest_dados';
 
   aoSimular = output<any>();
@@ -27,18 +29,21 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit() {
     this.carregarDadosSalvos();
-    this.form.valueChanges.subscribe(valores => {
-      if (this.form.valid) {
-        this.salvarNoStorage(valores);
-        const resultado = this.calculoService.simular(valores);
-        this.aoSimular.emit(resultado);
-      }
-    });
+    
+    
+    this.form.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef)) 
+      .subscribe(valores => {
+        if (this.form.valid) {
+          this.salvarNoStorage(valores);
+          const resultado = this.calculoService.simular(valores);
+          this.aoSimular.emit(resultado);
+        }
+      });
 
     this.simularInicial();
   }
 
-  
   resetarFormulario() {
     const valoresPadrao = {
       valorInicial: 1000,
@@ -49,9 +54,7 @@ export class FormularioComponent implements OnInit {
 
     localStorage.removeItem(this.STORAGE_KEY);
     
-    
     this.form.reset(valoresPadrao);
-    
     
     const resultado = this.calculoService.simular(valoresPadrao);
     this.aoSimular.emit(resultado);
@@ -64,7 +67,6 @@ export class FormularioComponent implements OnInit {
   private carregarDadosSalvos() {
     const salvo = localStorage.getItem(this.STORAGE_KEY);
     if (salvo) {
-      
       this.form.patchValue(JSON.parse(salvo), { emitEvent: false });
     }
   }

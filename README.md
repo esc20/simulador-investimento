@@ -1,69 +1,84 @@
-# Apex Invest - Simulador Reativo de Evolução Patrimonial
+# APEX INVEST
+## Simulador Reativo de Evolução Patrimonial
 
-Plataforma digital para simulação, projeção estatística e auditoria de juros compostos desenvolvida com Angular 18+. A aplicação utiliza o ecossistema de Reactive Forms associado a esteiras de cálculo reativo automatizado para computar evoluções patrimoniais em tempo real, distribuindo dados de forma unidirecional através de Signals centrais para painéis analíticos, gráficos interativos baseados em Chart.js e tabelas com rolagem e cabeçalho fixo.
-
----
----
-
-## Indicadores de Auditoria e Desempenho
-
-O simulador passou pela avaliação do Google Lighthouse na simulação para dispositivos móveis, apresentando os seguintes resultados oficiais de qualidade de software:
-
-* **Melhores Práticas (100/100)**: Pontuação máxima. O código cumpre todas as diretrizes modernas de segurança, integridade da Web API e uso de pacotes estáveis.
-* **Acessibilidade (95/100)**: Zona de excelência em conformidade com as regras da WCAG através do uso correto de atributos acessíveis (aria-labels) e calibração de contraste tipográfico.
-* **SEO (90/100)**: Estrutura otimizada com indexação correta de tags e metadados estruturados para motores de busca.
-* **Performance (45/100 - Mobile)**: Como o Chart.js renderiza o gráfico de linhas diretamente no Canvas usando a CPU do dispositivo, o navegador exige mais ciclos de processamento na inicialização em ambientes simulados de redes lentas. Para otimizar essa esteira, o projeto utiliza o recurso moderno de diretivas deferíveis (`@defer (on viewport)`) nativo do Angular, fazendo o download e a ativação do motor gráfico de forma sob demanda apenas quando o elemento entra na área visível do navegador.
+Plataforma digital para simulação, projeção estatística e auditoria de juros compostos desenvolvida com Angular 18+. A aplicação utiliza o sistema de formulários reativos para calcular a evolução do dinheiro em tempo real. Os dados são distribuídos de forma automática para painéis de resumo, gráficos interativos com Chart.js e tabelas organizadas.
 
 ---
 
-## Engenharia de Software e Diferenciais Técnicos
+### DEMONSTRAÇÃO VISUAL
 
-O desenvolvimento do simulador financeiro priorizou o acoplamento fraco entre as camadas de processamento matemático e interface, focando na performance, na imutabilidade de coleções e na governança de estados reativos:
-
-* **Centralização de Estado por Fonte Única de Verdade (Single Source of Truth)**: O componente orquestrador (`HomeComponent`) gerencia centralizadamente o estado das projeções através do Signal `resultadosSimulacao`. Quando o formulário dispara novos payloads aritméticos, a página intercepta o evento e distribui imediatamente o mesmo vetor de dados para múltiplos componentes filhos, garantindo a sincronização e consistência instantânea dos dados na tela.
-* **Isolamento de Regras de Negócio e Equivalência de Taxas**: A inteligência matemática da aplicação reside exclusivamente em um serviço dedicado (`CalculoService`), seguindo o Princípio de Responsabilidade Única (SRP). O motor computacional processa taxas nominais anuais e realiza a conversão geométrica precisa para taxas de juros mensais equivalentes via radiciação exponencial, garantindo a exatidão contábil das projeções patrimoniais em cadeias de loops mensais.
-* **Sincronismo Assíncrono para Motores Gráficos (Canvas Performance)**: A captura de novas coleções numéricas adota o bloco declarativo `effect()`. Para blindar o carregamento do motor gráfico (Chart.js) contra erros de referências nulas no DOM, a lógica de instanciação é encapsulada em uma rotina de temporização zero (`setTimeout`), empurrando a execução para a esteira de tarefas subsequente à montagem física do elemento Canvas pelo framework e eliminando vazamentos de memória (*memory leaks*).
-* **Engenharia de Interface para Tabelas Longas (Sticky Headers)**: O componente de listagem tabular processa matrizes de dados de longa duração (até 360 meses). O SCSS aplica diretivas de posicionamento fixo (`position: sticky`) associadas a fundos de cor sólida nos cabeçalhos (`th`), fazendo com que os dados deslizem por baixo da linha de títulos durante a rolagem, preservando a legibilidade e a ergonomia de auditorias contábeis complexas.
-* **Arquitetura de Reatividade Encadeada (Chained Computed Signals)**: O sistema de geração de insights adota um modelo de processamento passivo baseado em grafos de dependência. O Signal `porcentagemJuros` atua como um estado derivado de segundo nível, consumindo os payloads filtrados de outro nó computado (`dadosFinais`). Esta abordagem garante que equações de divisão fracionária e formatações numéricas rodem estritamente quando há mutação na matriz original, poupando ciclos de CPU.
+![Interface do Simulador](assets/apex-invest-demo.gif)
 
 ---
 
-## Estrutura Funcional e Componentização
+### DESEMPENHO REAL
+#### Indicadores de Auditoria Google Lighthouse
 
-A aplicação divide suas responsabilidades em unidades modulares de apresentação e inteligência de negócio:
+O simulador passou pela avaliação do Google Lighthouse na simulação para dispositivos móveis, apresentando os seguintes resultados oficiais:
 
-* **Home Component**: Unidade centralizadora que hospeda o estado através de Angular Signals reativos, distribuindo os resultados gerados de forma simétrica por meio de um CSS Grid assimétrico responsivo.
-* **Formulario Component**: Unidade de captura e validação de dados financeiros, responsável pelo gerenciamento de validações em tempo real e controle de persistência silenciosa no Local Storage com travas preventivas contra loops infinitos.
-* **Resultado Cards Component**: Módulo de balanço patrimonial encarregado do resumo macro dos dados (total acumulado, investido e juros), aplicando o controle de fluxo nativo do framework `@if (dadosFinais(); as dados)`.
-* **Insights Component**: Módulo analítico responsável por computar a taxa de eficiência de juros em cadeia, transformando dados brutos em resumos executivos estratégicos.
-* **Grafico Evolucao Component**: Painel analítico com renderização de curvas suavizadas (`tension: 0.4`) e adaptação geométrica fluida dentro de cavas neumórficas.
-* **Tabela Evolucao Component**: Grelha estruturada sob fontes monoespaçadas e formatações locais via `CurrencyPipe` para inspeção linha a linha do crescimento de ativos.
-
----
-
-## Tecnologias e Recursos Utilizados
-
-* **Angular 18+**: Standalone Components, Reactive Forms, Signals de Reatividade Granular, Computed States e controle nativo de fluxo.
-* **TypeScript**: Tipagem estrita de payloads de entrada (`SimulacaoInput`) e modelos de saída estruturados (`ResultadoSimulacao[]`).
-* **Chart.js & Ngx-Charts**: Integração de motor gráfico de alta performance para renderizações de Canvas vetoriais.
-* **SCSS Avançado**: Manipulação de propriedades neumórficas de relevo interno (`inset`) e elevado, além de reconfigurações dinâmicas de matrizes via Media Queries.
+*   **Melhores Práticas (100/100)**: Pontuação máxima. O código cumpre todas as diretrizes modernas de segurança e uso de pacotes estáveis.
+*   **Acessibilidade (95/100)**: Zona de excelência. Uso correto de etiquetas acessíveis e calibração de contraste para leitura confortável.
+*   **SEO (90/100)**: Estrutura otimizada com indexação correta de tags para motores de busca.
+*   **Performance (45/100 Mobile)**: Gráficos exigem mais processamento para desenhar na tela em celulares lentos. Para resolver isso, o projeto usa o recurso moderno `@defer` do Angular. O motor do gráfico só é baixado e ativado quando aparece na tela do usuário, economizando internet e memória.
 
 ---
 
-## Instruções para Execução do Projeto
+### ENGENHARIA DE SOFTWARE
+#### Diferenciais Técnicos e Arquitetura
 
-A aplicação necessita do runtime Node.js instalado no ambiente local de desenvolvimento:
+> O desenvolvimento do simulador financeiro focou na separação clara entre os cálculos matemáticos e a tela, garantindo velocidade, segurança e atualização instantânea.
+
+*   **Centralização de Dados por Fonte Única**
+    O componente principal gerencia todo o estado das projeções através de Angular Signals. Quando o usuário digita novos valores no formulário, o sistema calcula tudo e espalha o resultado para todos os painéis e gráficos ao mesmo tempo. Isso garante que a tela nunca mostre dados desalinhados.
+
+*   **Isolamento de Regras de Negócio e Matemática Financeira**
+    Toda a inteligência de cálculo fica guardada em um serviço isolado. O motor recebe a taxa de juros anual digitada pelo usuário e faz a conversão matemática exata para a taxa mensal através de fórmulas financeiras precisas, garantindo que as contas de juros compostos fiquem perfeitas mês a mês.
+
+*   **Sincronismo para Motores Gráficos e Telas**
+    Para evitar que o gráfico tente desenhar antes da tela carregar por completo, o sistema usa uma rotina de tempo curta (`setTimeout`). Isso joga o carregamento do gráfico para o momento exato em que o espaço visual do Canvas está pronto no navegador, evitando erros de carregamento e travamentos de memória.
+
+*   **Tabelas Longas com Cabeçalho Fixo (Sticky Headers)**
+    Como a simulação pode chegar a até 360 meses (30 anos), a tabela de resultados fica bem longa. O visual foi configurado via CSS com a propriedade `position: sticky`. Isso faz com que os números deslizem por baixo dos títulos ao rolar a página, mantendo a leitura fácil e organizada.
+
+---
+
+### ESTRUTURA FUNCIONAL
+#### Componentização e Responsabilidades
+
+A aplicação divide suas tarefas em blocos menores e organizados:
+
+*   **Home Component**: Tela principal que guarda as informações centrais do site e organiza a distribuição dos painéis.
+*   **Formulario Component**: Bloco de captura e validação dos dados financeiros digitados pelo usuário, salvando as preferências no navegador com LocalStorage.
+*   **Resultado Cards Component**: Módulo responsável por mostrar o resumo do dinheiro (total acumulado, valor investido e juros ganhos).
+*   **Insights Component**: Painel analítico que calcula de forma inteligente a eficiência dos juros no patrimônio do usuário.
+*   **Grafico Evolucao Component**: Gráfico de linhas com curvas suavizadas que se ajusta ao tamanho da tela.
+*   **Tabela Evolucao Component**: Lista detalhada que exibe o crescimento do dinheiro linha por linha com formatação de moeda local.
+
+---
+
+### TECNOLOGIAS E RECURSOS UTILIZADOS
+
+*   **Angular 18+**: Componentes independentes (*Standalone*), formulários reativos, gerenciamento de estado granular com Signals e controle de fluxo moderno.
+*   **TypeScript**: Definição rígida de tipos e modelos de dados para garantir que nenhuma informação inválida entre no cálculo.
+*   **Chart.js**: Biblioteca focada na criação e renderização de gráficos interativos de alta performance.
+*   **SCSS Avançado**: Configurações de design moderno com controle de espaçamento e adaptação completa para celulares e computadores.
+
+---
+
+### COMO EXECUTAR O PROJETO
+
+A aplicação necessita do ambiente Node.js instalado no seu computador:
 
 1. Clone o repositório utilizando o comando:
    ```bash
    git clone https://github.com
    ```
-2. Instale a árvore completa de dependências estruturais do pacote:
+2. Instale todas as dependências e pacotes de desenvolvimento:
    ```bash
    npm install
    ```
-3. Inicialize o processo de compilação e o servidor local de testes:
+3. Inicialize o servidor de desenvolvimento local:
    ```bash
    ng serve
    ```
-4. Navegue em seu navegador para o endereço padrão apontado pelo compilador: `http://localhost:4200`
+4. Abra o seu navegador de internet e acesse o endereço padrão: `http://localhost:4200`
